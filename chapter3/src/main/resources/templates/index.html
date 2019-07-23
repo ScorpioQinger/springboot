@@ -5,25 +5,29 @@
     <title>Thymeleaf Model</title>
 </head>
 <body>
-    <table style="text-align: center" width="50%"  cellspacing="1" cellpadding="2">
-        <tr>
-            <th th:text="#{header.book.bookname}">BookName</th>
-            <th th:text="#{header.book.autor}">Autor</th>
-            <th th:text="#{header.book.price}">Price</th>
-            <th th:text="#{header.book.edit}">Edit</th>
-        </tr>
-        <tr th:each="book:${books}">
-            <td th:text="${book.bookName}"></td>
-            <td th:text="${book.autor}"></td>
-            <td th:text="${#numbers.formatDecimal(book.price,1,2)}"></td>
-            <td><a  th:href="@{/}">点我</a></td>
-        </tr>
-        <tr th:remove="all">
-            <td>《Spring Boot 实战》</td>
-            <td>[美]克雷格.沃斯</td>
-            <td>59.00</td>
-            <td>点我</td>
-        </tr>
-    </table>
+    <div style="text-align: center" th:object="${header}">
+        <h2 th:text="*{title}">Thymeleaf 模板引擎</h2>
+        <span th:text="*{desc}"></span>
+        <table style="text-align: center" width="80%"  cellspacing="1" cellpadding="2">
+            <tr>
+                <th th:text="#{header.book.bookname}">BookName</th>
+                <th th:text="#{header.book.autor}">Autor</th>
+                <th th:text="#{header.book.price}">Price</th>
+                <th th:text="#{header.book.edit}">Edit</th>
+            </tr>
+            <tr th:each="book:${books}">
+                <td th:text="${book.bookName}"></td>
+                <td th:text="${book.autor}"></td>
+                <td th:text="${#numbers.formatDecimal(book.price,1,2)}"></td>
+                <td><a th:href="@{/}">点我</a></td>
+            </tr>
+            <tr th:remove="all">
+                <td>《Spring Boot 实战》</td>
+                <td>[美]克雷格.沃斯</td>
+                <td>59.00</td>
+                <td>点我</td>
+            </tr>
+        </table>
+    </div>
 </body>
 </html>
