@@ -11,6 +11,7 @@
     <groupId>com.example</groupId>
     <artifactId>chapter3-1-2</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <packaging>war</packaging>
     <name>chapter3-1-2</name>
     <description>Web开发篇—Jsp模板引擎渲染web视图</description>
 
@@ -43,6 +44,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>

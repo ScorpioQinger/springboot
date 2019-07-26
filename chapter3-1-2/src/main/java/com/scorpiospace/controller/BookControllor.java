@@ -28,7 +28,6 @@ public class BookControllor {
         bookList.add(book);
         book = new Book("《微习惯》","[美]斯蒂芬.盖斯","38");
         bookList.add(book);
-        Header header = new Header("web应用之Thymeleaf模板","Thymeleaf是一个XML/XHTML/HTML5模板引擎");
         ModelAndView modelAndView = new ModelAndView("index");
         modelAndView.addObject("books",bookList);
         return modelAndView;
