@@ -48,9 +48,24 @@ public class ResultVo {
      * @return:       com.scorpiospace.domain.po.Result<T>
      **/
     public static <T> Result<T> fail(Integer code,String msg){
-        Result<T> result = new Result<T>();
+        Result<T> result = new Result<>();
         result.setCode(code);
         result.setMsg(msg);
+        return result;
+    }
+    
+    /**
+     * @Description   TODO 失败，有数据返回
+     * @Author:       zq
+     * @Date:         2019/8/5 16:18
+     * @param:        [code, msg, data]
+     * @return:       com.scorpiospace.domain.po.Result<T>
+     **/
+    public static <T> Result<T> fail(Integer code,String msg,T data){
+        Result<T> result = new Result<>();
+        result.setCode(code);
+        result.setMsg(msg);
+        result.setData(data);
         return result;
     }
 
