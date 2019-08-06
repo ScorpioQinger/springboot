@@ -1,21 +1,18 @@
 package com.scorpiospace.handler;
 
-import com.scorpiospace.domain.po.Result;
-import com.scorpiospace.domain.vo.ResultVo;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ErrorProperties;
+import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
+import org.springframework.boot.web.servlet.error.DefaultErrorAttributes;
 import org.springframework.boot.web.servlet.error.ErrorAttributes;
-import org.springframework.boot.web.servlet.error.ErrorController;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.context.request.ServletWebRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
-
 
 /**
  * @ClassName MyBasicErrorController
@@ -26,35 +23,26 @@ import java.util.Map;
  **/
 @Slf4j
 @Controller
-public class MyBasicErrorController implements ErrorController {
-    private static final String ERROR_PATH="/error";
-    private ErrorAttributes errorAttributes;
-    @Override
-    public String getErrorPath() {
-        return ERROR_PATH;
+public class MyBasicErrorController extends BasicErrorController {
+
+
+    public MyBasicErrorController() {
+        super(new DefaultErrorAttributes(), new ErrorProperties());
     }
 
-    @Autowired
-    public MyBasicErrorController(ErrorAttributes errorAttributes) {
-        this.errorAttributes=errorAttributes;
+    @RequestMapping(produces = "text/html",value="/500")
+    public ModelAndView errorHtml500(HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(getStatus(request).value());
+        Map<String, Object> model = getErrorAttributes(request,isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        model.put("msg","自定义错误信息");
+        return new ModelAndView("error/500", model);
     }
 
-    @RequestMapping(value=ERROR_PATH,produces="text/html")
-    public ModelAndView errorPageHandler(HttpServletRequest request, HttpServletResponse response) {
-        ServletWebRequest requestAttributes =  new ServletWebRequest(request);
-        Map<String, Object> attr = this.errorAttributes.getErrorAttributes(requestAttributes, false);
-        ModelAndView modelAndView = new ModelAndView(ERROR_PATH);
-        modelAndView.addObject("status",attr.get("status"));
-        modelAndView.addObject("message",attr.get("message"));
-        return modelAndView;
+    @RequestMapping(value="/404")
+    public ModelAndView errorHtml404(HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(getStatus(request).value());
+        Map<String, Object> model = getErrorAttributes(request,isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        model.put("msg","自定义错误信息");
+        return new ModelAndView("error/404", model);
     }
-
-    @RequestMapping(value=ERROR_PATH)
-    @ResponseBody
-    public Result errorApiHander(HttpServletRequest request) {
-        ServletWebRequest requestAttributes = new ServletWebRequest(request);
-        Map<String, Object> attr=this.errorAttributes.getErrorAttributes(requestAttributes, false);
-        return ResultVo.fail((int) attr.get("status"),(String) attr.get("message"));
-    }
-
 }
