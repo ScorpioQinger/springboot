@@ -29,6 +29,12 @@
             <scope>test</scope>
         </dependency>
 
+        <!--thymeleaf模版-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
+        </dependency>
+
         <!--数据库支持-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

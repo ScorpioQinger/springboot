@@ -21,7 +21,7 @@ public class User {
     private String idCard;
     private String mobile;
     private String pwd;
-    private String rolse;
+    private String roles;
     private Date regTime;
 
 }
