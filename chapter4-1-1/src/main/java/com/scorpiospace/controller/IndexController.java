@@ -2,16 +2,12 @@ package com.scorpiospace.controller;
 
 import com.scorpiospace.domain.po.User;
 import com.scorpiospace.service.IUserService;
-import com.scorpiospace.utils.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Date;
 import java.util.List;
 
 @Controller

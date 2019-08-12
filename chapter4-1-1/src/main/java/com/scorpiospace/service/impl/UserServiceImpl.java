@@ -3,6 +3,7 @@ package com.scorpiospace.service.impl;
 import com.scorpiospace.dao.UserDao;
 import com.scorpiospace.domain.po.User;
 import com.scorpiospace.service.IUserService;
+import com.scorpiospace.utils.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -27,7 +28,8 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void update(User user) {
-
+        user.setUid(new SnowflakeIdWorker(1,1).nextId());
+        user.setPwd("111111");
         userDao.update(user);
     }
 
