@@ -20,7 +20,7 @@ public class IndexController {
     @Autowired
     private IUserService userService;
 
-    @PostMapping("/list")
+    @RequestMapping("/list")
     public ModelAndView userList(){
         List<User> users = userService.findUserList();
         ModelAndView modelAndView = new ModelAndView("page/userList");
@@ -44,13 +44,6 @@ public class IndexController {
 
     @RequestMapping("/add")
     public String addUser(@RequestParam User user){
-        user.setUid(new SnowflakeIdWorker(1,1).nextId());
-        user.setName("foo");
-        user.setMobile("17647575742");
-        user.setIdCard("110201199411017867");
-        user.setPwd("123456");
-        user.setRoles("3");
-        user.setRegTime(new Date());
         userService.add(user);
         return "/list";
     }

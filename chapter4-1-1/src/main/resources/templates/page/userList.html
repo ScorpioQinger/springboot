@@ -1,14 +1,29 @@
 <!DOCTYPE html>
 <html lang="th" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title>用户列表</title>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <style>
+        .main{
+            width: 1000px;
+            height: 450px;
+            position:absolute;
+            top:50%;
+            left:50%;
+            margin:-300px 0 0 -400px;
+            text-align: center
+        }
+    </style>
 </head>
 <body>
-<div style="text-align: center" >
-
-    <table style="text-align: center" width="80%"  cellspacing="1" cellpadding="2" border="1">
-        <tr>
+ <div class="main">
+  <table class="table table-bordered" style="margin: auto">
+    <caption>用户信息</caption>
+      <thead>
+        <tr >
             <th th:text="#{header.user.userNo}">用户编号</th>
             <th th:text="#{header.user.name}">姓名</th>
             <th th:text="#{header.user.idCard}">证件号</th>
@@ -17,9 +32,10 @@
             <th th:text="#{header.user.roles}">角色</th>
             <th th:text="#{header.user.regTime}">注册时间</th>
             <th colspan="2" th:text="#{header.user.edit}">编辑</th>
-
         </tr>
-        <tr th:if="${users} != null" th:each="user:${users}">
+      </thead>
+      <tbody>
+        <tr th:if="${users}" th:each="user:${users}">
             <td th:text="${user.uid}"></td>
             <td th:text="${user.name}"></td>
             <td th:text="${user.idCard}"></td>
@@ -30,10 +46,11 @@
             <td><a th:href="@{/update/}+${user.uid}">修改</a></td>
             <td><a th:href="@{/del/}+${user.uid}">删除</a></td>
         </tr>
-        <tr th:unless="${users} == null">
+        <tr th:unless="${users}">
            <td colspan="9">无数据</td>
         </tr>
-    </table>
-</div>
+      </tbody>
+  </table>
+ </div>
 </body>
 </html>
