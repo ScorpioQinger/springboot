@@ -35,6 +35,20 @@ public class Chapter411ApplicationTests {
         user.setRoles(3);
         userService.add(user);
     }
+
+    @Test
+    public void addGetKey(){
+        User user = new User();
+        user.setUid(new SnowflakeIdWorker(1,1).nextId());
+        user.setName("coco");
+        user.setMobile("18347062900");
+        user.setIdCard("110201199312017867");
+        user.setPwd("111111");
+        user.setRoles(3);
+        User newUser = userService.addtGetKey(user);
+        log.info(newUser.toString());
+    }
+
     @Test
     public void findUser(){
        User user = userService.findUser(610485881870094336L);

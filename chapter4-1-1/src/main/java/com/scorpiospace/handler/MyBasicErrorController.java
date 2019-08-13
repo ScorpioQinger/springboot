@@ -1,6 +1,5 @@
 package com.scorpiospace.handler;
 
-import com.scorpiospace.exception.DBException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
@@ -9,7 +8,6 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
@@ -24,17 +22,14 @@ import java.util.Map;
 @Slf4j
 @Controller
 public class MyBasicErrorController extends BasicErrorController {
-
-
     public MyBasicErrorController() {
         super(new DefaultErrorAttributes(), new ErrorProperties());
     }
 
     @RequestMapping(produces = "text/html",value="/500")
-    public ModelAndView errorHtml500(DBException e, HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView errorHtml500(Exception e, HttpServletRequest request, HttpServletResponse response){
         response.setStatus(getStatus(request).value());
         Map<String, Object> model = getErrorAttributes(request,isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        model.put("msg",e.getResultCode().getMsg());
         return new ModelAndView("error/500", model);
     }
 
@@ -44,4 +39,12 @@ public class MyBasicErrorController extends BasicErrorController {
         Map<String, Object> model = getErrorAttributes(request,isIncludeStackTrace(request, MediaType.TEXT_HTML));
         return new ModelAndView("error/404", model);
     }
+
+    @RequestMapping
+    public ModelAndView error(HttpServletRequest request, HttpServletResponse response){
+        response.setStatus(getStatus(request).value());
+        Map<String, Object> model = getErrorAttributes(request,isIncludeStackTrace(request, MediaType.TEXT_HTML));
+        return new ModelAndView("error/404", model);
+    }
+
 }

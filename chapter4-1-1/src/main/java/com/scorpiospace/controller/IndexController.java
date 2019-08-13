@@ -1,12 +1,12 @@
 package com.scorpiospace.controller;
 
+import com.scorpiospace.domain.po.Result;
 import com.scorpiospace.domain.po.User;
+import com.scorpiospace.domain.vo.ResultVo;
 import com.scorpiospace.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
 
@@ -38,19 +38,21 @@ public class IndexController {
         return "/list";
     }
 
-    @RequestMapping("/add")
-    public String addUser(@RequestParam User user){
+    @PostMapping("/add")
+    @ResponseBody
+    public Result addUser(@RequestParam User user){
         userService.add(user);
-        return "/list";
+        return ResultVo.sucess();
     }
+
     @RequestMapping("/addPage")
     public String addPage(){
        return "page/addUser" ;
     }
+
     @RequestMapping("del/{uid}")
     public String delUser(@PathVariable Long uid){
         userService.delete(uid);
         return "/list";
     }
-
 }

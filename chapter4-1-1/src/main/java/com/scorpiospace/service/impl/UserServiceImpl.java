@@ -2,11 +2,12 @@ package com.scorpiospace.service.impl;
 
 import com.scorpiospace.dao.UserDao;
 import com.scorpiospace.domain.po.User;
+import com.scorpiospace.exception.DBException;
+import com.scorpiospace.exception.code.DBCode;
 import com.scorpiospace.service.IUserService;
 import com.scorpiospace.utils.SnowflakeIdWorker;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 /**
@@ -23,7 +24,16 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void add(User user) {
+        User u = userDao.findUserByIdCard(user.getIdCard());
+        if(null != u){
+            throw new DBException(DBCode.DATA_ALREADY_EXISTED);
+        }
         userDao.add(user);
+    }
+
+    @Override
+    public User addtGetKey(User user) {
+       return userDao.insertGetKey(user);
     }
 
     @Override

@@ -1,21 +1,21 @@
 package com.scorpiospace.exception;
 
-import com.scorpiospace.constant.ResultCode;
+import com.scorpiospace.exception.code.DBCode;
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class DBException extends RuntimeException {
-    private ResultCode resultCode;
+    private DBCode dbCode;
 
     DBException(){
      super();
     }
 
-    public DBException(ResultCode code){
+    public DBException(DBCode code){
         super(code.getMsg());
-        this.resultCode = code;
+        this.dbCode = code;
     }
 
 }
