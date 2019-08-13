@@ -40,11 +40,4 @@ public class MyBasicErrorController extends BasicErrorController {
         return new ModelAndView("error/404", model);
     }
 
-    @RequestMapping
-    public ModelAndView error(HttpServletRequest request, HttpServletResponse response){
-        response.setStatus(getStatus(request).value());
-        Map<String, Object> model = getErrorAttributes(request,isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        return new ModelAndView("error/404", model);
-    }
-
 }
