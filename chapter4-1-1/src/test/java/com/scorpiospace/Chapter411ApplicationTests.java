@@ -9,8 +9,6 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-
-import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -39,7 +37,7 @@ public class Chapter411ApplicationTests {
     }
     @Test
     public void findUser(){
-       User user = userService.findUser(610437530340429824L);
+       User user = userService.findUser(610485881870094336L);
        log.info("用户信息：[{}]",user.toString());
     }
 
@@ -60,7 +58,7 @@ public class Chapter411ApplicationTests {
         User user = new User();
         user.setName("coco");
         user.setMobile("18347062900");
-        user.setUid(610437530340429824L);
+        user.setUid(610485881870094336L);
         userService.update(user);
     }
 

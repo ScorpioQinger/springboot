@@ -1,5 +1,6 @@
 package com.scorpiospace.handler;
 
+import com.scorpiospace.exception.DBException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.autoconfigure.web.ErrorProperties;
 import org.springframework.boot.autoconfigure.web.servlet.error.BasicErrorController;
@@ -30,10 +31,10 @@ public class MyBasicErrorController extends BasicErrorController {
     }
 
     @RequestMapping(produces = "text/html",value="/500")
-    public ModelAndView errorHtml500(HttpServletRequest request, HttpServletResponse response){
+    public ModelAndView errorHtml500(DBException e, HttpServletRequest request, HttpServletResponse response){
         response.setStatus(getStatus(request).value());
         Map<String, Object> model = getErrorAttributes(request,isIncludeStackTrace(request, MediaType.TEXT_HTML));
-        model.put("msg","自定义错误信息");
+        model.put("msg",e.getResultCode().getMsg());
         return new ModelAndView("error/500", model);
     }
 

@@ -43,7 +43,10 @@ public class IndexController {
         userService.add(user);
         return "/list";
     }
-
+    @RequestMapping("/addPage")
+    public String addPage(){
+       return "page/addUser" ;
+    }
     @RequestMapping("del/{uid}")
     public String delUser(@PathVariable Long uid){
         userService.delete(uid);
