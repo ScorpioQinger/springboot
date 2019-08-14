@@ -4,12 +4,13 @@ import com.scorpiospace.domain.po.Result;
 import com.scorpiospace.domain.po.User;
 import com.scorpiospace.domain.vo.ResultVo;
 import com.scorpiospace.service.IUserService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.List;
-
+@Slf4j
 @Controller
 @RequestMapping("/user")
 public class IndexController {
@@ -32,27 +33,32 @@ public class IndexController {
         return modelAndView;
     }
 
-    @RequestMapping("/update")
-    public String updateUser(@RequestParam User user){
+    @RequestMapping(value = "/update",method = RequestMethod.POST)
+    public String updateUser(@RequestParam Long uid,@RequestParam String name,@RequestParam String mobile){
+        User user = new User();
+        user.setName(name);
+        user.setMobile(mobile);
+        user.setUid(uid);
         userService.update(user);
-        return "/list";
+        return "page/userList";
     }
 
-    @PostMapping("/add")
+    @RequestMapping(value = "/add",method = RequestMethod.POST)
     @ResponseBody
-    public Result addUser(@RequestParam User user){
+    public Result addUser(@RequestParam("name") String name,@RequestParam("mobile") String mobile,
+                          @RequestParam("idCard") String idCard,@RequestParam("roles") Integer roles){
+        User user = new User();
+        user.setName(name);
+        user.setMobile(mobile);
+        user.setIdCard(idCard);
+        user.setRoles(roles);
         userService.add(user);
         return ResultVo.sucess();
     }
 
-    @RequestMapping("/addPage")
-    public String addPage(){
-       return "page/addUser" ;
-    }
-
-    @RequestMapping("del/{uid}")
+    @RequestMapping("/del/{uid}")
     public String delUser(@PathVariable Long uid){
         userService.delete(uid);
-        return "/list";
+        return "redirect:/user/list";
     }
 }

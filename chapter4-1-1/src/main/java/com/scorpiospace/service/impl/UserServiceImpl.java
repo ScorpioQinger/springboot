@@ -28,6 +28,8 @@ public class UserServiceImpl implements IUserService {
         if(null != u){
             throw new DBException(DBCode.DATA_ALREADY_EXISTED);
         }
+        user.setUid(new SnowflakeIdWorker(1,1).nextId());
+        user.setPwd("111111");
         userDao.add(user);
     }
 
@@ -38,8 +40,6 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void update(User user) {
-        user.setUid(new SnowflakeIdWorker(1,1).nextId());
-        user.setPwd("111111");
         userDao.update(user);
     }
 

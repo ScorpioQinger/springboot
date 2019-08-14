@@ -6,6 +6,24 @@
     <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        function addUserInfo() {
+            $.ajax({
+                type: "POST",
+                dataType: "json",
+                url: "/user/add" ,
+                data:{"name":$("#name").val(), "mobile":$("#mobile").val(),"idCard":$("#idCard").val(),"roles":$("#roles").val()},
+                success: function (result) {
+                    console.log(result);
+                    if (result.status == 0) {
+                        alert("SUCCESS");
+                    };
+                },
+                error : function() {
+                    alert("异常！");
+                }});
+        }
+    </script>
     <style>
       th{
           text-align:center
@@ -41,8 +59,8 @@
                 <td th:text="${user.mobile}"></td>
                 <td th:text="${user.pwd}"></td>
                 <td th:text="${user.roles}"></td>
-                <td th:text="${#dates.format(user.regTime,'YYYY-MM-DD hh:mm:ss')}"></td>
-                <td><a th:href="@{/user/update/}+${user.uid}">修改</a></td>
+                <td th:text="${#dates.format(user.regTime,'YYYY-MM-dd HH:mm:ss')}"></td>
+                <td><a th:href="@{/user/find/}+${user.uid}">修改</a></td>
                 <td><a th:href="@{/user/del/}+${user.uid}">删除</a></td>
             </tr>
             <tr th:unless="${users}">
@@ -50,14 +68,9 @@
             </tr>
           </tbody>
       </table>
-<!--        <a class="btn btn-default" th:href="@{/user/addPage}" role="button">新增</a>-->
-
-
         <button type="button" class="btn btn-primary" data-toggle="modal"  data-target="#myModal" aria-pressed="false" autocomplete="off">
             Add
         </button>
-
-
     </div>
    <div class="col-md-2"></div>
  </div>
@@ -75,7 +88,7 @@
                  </h4>
              </div>
              <div class="modal-body">
-                 <form class="form-horizontal" role="form" th:action="@{/user/add}" method="post">
+                 <form class="form-horizontal" role="form" id="addForm" >
                      <div class="form-group">
                          <label for="name" class="col-sm-2 control-label">昵称</label>
                          <div class="col-sm-10">
@@ -113,12 +126,12 @@
                  <button type="button" class="btn btn-default"
                          data-dismiss="modal">关闭
                  </button>
-                 <button type="button" class="btn btn-primary">
+                 <button type="button" class="btn btn-primary" onclick="addUserInfo()">
                      提交更改
                  </button>
              </div>
-         </div><!-- /.modal-content -->
-     </div><!-- /.modal-dialog -->
- </div><!-- /.modal -->
+         </div>
+     </div>
+ </div>
 </body>
 </html>
