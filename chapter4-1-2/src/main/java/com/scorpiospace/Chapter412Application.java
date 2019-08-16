@@ -1,4 +1,4 @@
-package com.example.scorpiospace;
+package com.scorpiospace;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
