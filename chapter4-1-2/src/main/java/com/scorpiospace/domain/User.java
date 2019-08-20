@@ -42,6 +42,9 @@ public class User {
     @Column(name = "reg_time")
     @Temporal(value = TemporalType.TIMESTAMP)
     private Date regTime;
+    //Date 日期型，精确到年月日，例如“2008-08-08”
+    //Time 时间型，精确到时分秒，例如“20:00:00”
+    //Timestamp 时间戳，精确到纳秒，例如“2008-08-08 20:00:00.000000001”
 
 
     public User(Long uid, String name, String mobile, String pwd, String idCard, Integer roles) {

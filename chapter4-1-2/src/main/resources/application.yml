@@ -1,13 +1,34 @@
 server:
   port: 9090
+
 spring:
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
     url: jdbc:mysql://112.74.52.39:3306/springboot_db?useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8
     username: root
     password: zqyxb1314
+  ###############################
+  ### spring data jpa配置
+  ###############################
   jpa:
     hibernate:
+      #自动映射成为数据库的表结构：
+      #creat：每次运行程序时，都会重新创建表，故而数据会丢失
+      #creat-drop：每次运行程序时会先创建表结构，然后待程序结束时清空表
+      #update：每次运行程序，没有表时会创建表，如果对象发生改变会更新新表结构，原有数据不会清空，只会更新（推荐使用）
+      #validate：运行程序会校验数据与数据库的字段类型是否相同，字段不同会报错
+      #none：禁用DDL处理
       ddl-auto: update
+      #命名策略：当创建Entity时，会在DB中创建一个表结构
+      #驼峰命名法（大写加下划线）：org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+      #以属性名命名（默认）：org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      naming:
+        physical-strategy: org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy
+    #打印sql
     show-sql: true
+    #使用的InnoDBD引擎
     database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    #指定jpa的DB
+    database: mysql
+
+
