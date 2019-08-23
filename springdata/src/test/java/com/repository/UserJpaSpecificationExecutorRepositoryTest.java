@@ -46,14 +46,12 @@ public class UserJpaSpecificationExecutorRepositoryTest {
     @Test
     public void testFindAll(){
         Sort sort = new Sort(Sort.Direction.DESC,"id");
-        Pageable page =  PageRequest.of(1,3,sort);
+        Pageable page =  PageRequest.of(0,3,sort);
         Specification<User> specification = new Specification<User>() {
             public Predicate toPredicate(Root<User> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
                 Path path = root.get("regTime");
-                criteriaBuilder.between(path,DateTimeUtil.convertAsDate("2019-08-16"),
-                        DateTimeUtil.convertAsDate("2019-08-22"));
-
-                return null;
+                return criteriaBuilder.between(path,DateTimeUtil.convertAsDate("2019-08-22"),
+                        DateTimeUtil.convertAsDate("2019-08-23"));
             }
         };
 
