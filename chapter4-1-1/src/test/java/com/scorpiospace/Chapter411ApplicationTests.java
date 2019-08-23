@@ -51,7 +51,7 @@ public class Chapter411ApplicationTests {
 
     @Test
     public void findUser(){
-       User user = userService.findUser(610485881870094336L);
+       User user = userService.findUser(611925549614501888l);
        log.info("用户信息：[{}]",user.toString());
     }
 
