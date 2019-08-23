@@ -18,12 +18,12 @@ public class JDBCUtil {
      */
     public static Connection getConnection() throws Exception {
 
-        InputStream inputStream = JDBCUtil.class.getResourceAsStream("db.properties");
+        InputStream inputStream = JDBCUtil.class.getResourceAsStream("/db.properties");
         Properties properties = new Properties();
         properties.load(inputStream);
 
         String url = properties.getProperty("jdbc.url");
-        String user =  properties.getProperty("jdbc.user");
+        String user =  properties.getProperty("jdbc.username");
         String password = properties.getProperty("jdbc.password");
         String driverClass = properties.getProperty("jdbc.driverClass");
         Class.forName(driverClass);
