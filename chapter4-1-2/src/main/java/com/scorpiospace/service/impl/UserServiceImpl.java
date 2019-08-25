@@ -1,7 +1,7 @@
 package com.scorpiospace.service.impl;
 
-import com.scorpiospace.domain.User;
-import com.scorpiospace.repository.UserRepository;
+import com.scorpiospace.domain.line.User;
+import com.scorpiospace.repository.line.UserRepository;
 import com.scorpiospace.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

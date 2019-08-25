@@ -1,7 +1,7 @@
-package com.scorpiospace.repository;
+package com.scorpiospace.repository.line;
 
 
-import com.scorpiospace.domain.User;
+import com.scorpiospace.domain.line.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;

@@ -1,4 +1,4 @@
-package com.scorpiospace.domain;
+package com.scorpiospace.domain.line;
 
 import lombok.Getter;
 import lombok.Setter;

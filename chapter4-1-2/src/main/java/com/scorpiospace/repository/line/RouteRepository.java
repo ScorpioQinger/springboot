@@ -1,6 +1,6 @@
-package com.scorpiospace.repository;
+package com.scorpiospace.repository.line;
 
-import com.scorpiospace.domain.Route;
+import com.scorpiospace.domain.line.Route;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
