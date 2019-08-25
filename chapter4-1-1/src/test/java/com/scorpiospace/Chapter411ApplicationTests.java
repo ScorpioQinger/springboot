@@ -4,10 +4,13 @@ import com.scorpiospace.domain.po.User;
 import com.scorpiospace.service.IUserService;
 import com.scorpiospace.utils.SnowflakeIdWorker;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
 import java.util.Iterator;
 import java.util.List;
@@ -19,8 +22,26 @@ public class Chapter411ApplicationTests {
     @Autowired
     private IUserService userService;
 
+    @Autowired
+    @Qualifier("lineJdbcTemplate")
+    private JdbcTemplate lineJdbcTemplate;
+
+    @Autowired
+    @Qualifier("localJdbcTemplate")
+    private JdbcTemplate localJdbcTemplate;
+
+
     @Test
-    public void contextLoads() {
+    public void testLineJdbcTemplate() {
+        String sql = "select count(1) from u_user";
+        Assert.assertEquals("8",lineJdbcTemplate.queryForObject(sql,String.class));
+    }
+
+    @Test
+    public void testLocalJdbcTemplate(){
+        String sql = "insert into u_user(u_id,u_name) values(?,?)";
+        localJdbcTemplate.update(sql,611925549614501888l,"樱木花道");
+        Assert.assertEquals("2",localJdbcTemplate.queryForObject("select count(1) from u_user",String.class));
 
     }
 
