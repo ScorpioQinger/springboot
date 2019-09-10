@@ -16,20 +16,20 @@ public class User {
 
     private String mobile;
 
-    private String pwd;
+    private String uPwd;
 
     private Integer roles;
 
     private Date regTime;
 
-    public User(Long uId, String uName, String idCard, String mobile, String pwd, Integer roles) {
+    public User(Long uId, String uName, String idCard, String mobile, String uPwd, Integer roles) {
         this.id = id;
         this.uId = uId;
         this.uName = uName;
         this.idCard = idCard;
         this.mobile = mobile;
-        this.pwd = pwd;
+        this.uPwd= uPwd;
         this.roles = roles;
-        this.regTime = regTime;
     }
+    public User(){}
 }
