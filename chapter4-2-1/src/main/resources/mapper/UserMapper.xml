@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.scorpiospace.dao.UserDao">
+    <resultMap id="BaseResultMap" type="com.scorpiospace.domain.User">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="u_id" property="uid" jdbcType="BIGINT"/>
+        <result column="u_name" property="uname" jdbcType="VARCHAR"/>
+        <result column="id_card" property="idCard" jdbcType="VARCHAR"/>
+        <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+        <result column="u_pwd" property="upwd" jdbcType="VARCHAR"/>
+        <result column="roles" property="roles" jdbcType="INTEGER"/>
+        <result column="reg_time" property="regTime" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <select id="findOne" resultMap="BaseResultMap" parameterType="Long">
+        SELECT * FROM u_user WHERE u_id=#{uid}
+    </select>
+
+    <update id="updateUser" >
+        UPDATE u_user SET u_name=#{uname} WHERE u_id=#{uid}
+    </update>
+
+    <delete id="delUser" parameterType="Long">
+        DELETE  FROM u_user WHERE u_id=#{uid}
+    </delete>
+</mapper>
